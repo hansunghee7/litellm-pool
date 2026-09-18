@@ -1,0 +1,17 @@
+model_list:
+  - model_name: gemini-pool
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+      fallbacks:
+        - gemini/gemini-2.5-flash-lite
+        - sambanova/llama-3.3-70b-instruct
+        - groq/llama-3.3-70b-versatile
+        - github/gpt-4o-mini
+        - openrouter/qwen/qwen-2.5-72b-instruct:free
+
+router_settings:
+  fallbacks:
+    - {"gemini/gemini-2.5-flash": ["gemini/gemini-2.5-flash-lite", "sambanova/llama-3.3-70b-instruct", "groq/llama-3.3-70b-versatile", "github/gpt-4o-mini", "openrouter/qwen/qwen-2.5-72b-instruct:free"]}
+  cooldown_time: 60
+  allowed_fails: 1
